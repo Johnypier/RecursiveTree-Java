@@ -1,5 +1,4 @@
 public class RecursiveNode<T extends Comparable<T>> {
-
 	private T content;
 	private RecursiveNode<T> leftNode;
 	private RecursiveNode<T> rightNode;
@@ -11,12 +10,19 @@ public class RecursiveNode<T extends Comparable<T>> {
 		this.rightNode = null;
 	}
 
+	/**
+	 * Insert the specified value into the binary tree.
+	 * 
+	 * @param value Value to insert.
+	 * @return Status of the insertion.
+	 */
 	public boolean insert(T value) {
 		int temp = this.content.compareTo(value);
 		if (this.content == value) {
 			size++;
 			return false;
-		} else if (temp > 0) {
+		}
+		if (temp > 0) {
 			if (this.leftNode != null) {
 				size++;
 				return this.leftNode.insert(value);
@@ -37,11 +43,18 @@ public class RecursiveNode<T extends Comparable<T>> {
 		}
 	}
 
+	/**
+	 * Check if the specified value is contained in the binary tree.
+	 * 
+	 * @param value Value to find.
+	 * @return Result of the check.
+	 */
 	public boolean contains(T value) {
 		int temp = this.content.compareTo(value);
 		if (this.content == value) {
 			return true;
-		} else if (temp > 0) {
+		}
+		if (temp > 0) {
 			if (this.leftNode != null) {
 				return this.leftNode.contains(value);
 			}
@@ -53,10 +66,11 @@ public class RecursiveNode<T extends Comparable<T>> {
 		return false;
 	}
 
-	public int size() {
-		return size;
-	}
-
+	/**
+	 * Retrieve the biggest value of the binary tree.
+	 * 
+	 * @return Biggest value.
+	 */
 	public T getSmallest() {
 		if (leftNode == null) {
 			return content;
@@ -64,6 +78,11 @@ public class RecursiveNode<T extends Comparable<T>> {
 		return leftNode.getSmallest();
 	}
 
+	/**
+	 * Retrieve the biggest value of the binary tree.
+	 * 
+	 * @return Biggest value.
+	 */
 	public T getBiggest() {
 		if (rightNode == null) {
 			return content;
@@ -71,6 +90,12 @@ public class RecursiveNode<T extends Comparable<T>> {
 		return rightNode.getBiggest();
 	}
 
+	/**
+	 * Remove the specified value from the binary tree.
+	 * 
+	 * @param value Value to remove.
+	 * @return Result of the operation.
+	 */
 	public boolean remove(T value) {
 		if (value == null) {
 			return false;
@@ -95,6 +120,9 @@ public class RecursiveNode<T extends Comparable<T>> {
 		return false;
 	}
 
+	/**
+	 * Remove all nodes which have null content.
+	 */
 	public void removeNull() {
 		if (rightNode != null && rightNode.getContent() == null) {
 			rightNode = null;
@@ -111,13 +139,22 @@ public class RecursiveNode<T extends Comparable<T>> {
 	}
 
 	protected boolean isEmpty() {
-		if (leftNode == null && rightNode == null) {
-			return true;
-		}
-		return false;
+		return leftNode == null && rightNode == null;
+	}
+
+	public int size() {
+		return size;
 	}
 
 	public T getContent() {
 		return content;
+	}
+
+	public RecursiveNode<T> getLeftNode() {
+		return leftNode;
+	}
+
+	public RecursiveNode<T> getRightNode() {
+		return rightNode;
 	}
 }
